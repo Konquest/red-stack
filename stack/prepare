@@ -18,7 +18,7 @@ mkdir -p /tmp/log
     git --version
     java -version
     ruby -v
-    gem -v
+    echo gem version `gem -v`
     python -V
   ) | sed -u "s/^/      /"
 ) 2>&1 | tee $LOG
