@@ -1,9 +1,8 @@
-httpd
-postgresql84-server.x86_64
-php.x86_64
+yum-priorities
+ruby
+rubygems
+npm
+java-1.6.0-openjdk
 subversion
-ant
-vim-X11
-vim-common
-vim-enhancedd
-vim-minimal
+httpd
+php.x86_64
