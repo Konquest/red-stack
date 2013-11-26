@@ -1,7 +1,6 @@
 yum-priorities
 ruby
 rubygems
-npm
 java-1.6.0-openjdk
 subversion
 httpd

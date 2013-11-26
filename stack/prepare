@@ -15,9 +15,7 @@ mkdir -p /tmp/log
     java -version
     ruby -v
     gem -v
-    python -v
-    node -v
-    npm -v
+    python -V
   ) | sed -u "s/^/      /"
 ) 2>&1 | tee $LOG
 
