@@ -19,5 +19,5 @@ mkdir -p /tmp/log
     node -v
     npm -v
   ) | sed -u "s/^/      /"
-) 2>$1 | tee $LOG
+) 2>&1 | tee $LOG
 
