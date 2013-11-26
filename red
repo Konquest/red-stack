@@ -31,7 +31,7 @@ case "$1" in
 
     ID=$(tar -cf - . | docker run -i -a stdin kennethklee/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app && /build/builder")
     test $(docker wait $ID) -eq 0
-    docker commit $ID $NAME $TAG > /dev/null 
+    docker commit $ID $IMAGE > /dev/null 
 
     ;;
 
