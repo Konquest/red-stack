@@ -7,7 +7,6 @@ mkdir -p /tmp/log
 (
   display Installing packages
   xargs yum -y install < /build/packages.txt
-  yum -y clean
 
   display Installed versions:
   (

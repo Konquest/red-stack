@@ -9,4 +9,4 @@ RUN mkdir /build
 ADD ./stack /build
 RUN LC_ALL=C /build/prepare
 
-RUN yum -y clean
+RUN yum -y clean all
