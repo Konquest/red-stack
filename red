@@ -1,5 +1,5 @@
 #!/bin/bash
-echo $#
+
 case "$1" in
   ssh)
     if [[ -z "$2" ]]; then
@@ -11,6 +11,7 @@ case "$1" in
     ;;
 
   deploy)
+    echo "Deploying image"
     echo "WIP - This should do a number of things:"
     echo "1. tar up current directory"
     echo "2. copy and extract the tar in a /app path"
@@ -20,8 +21,8 @@ case "$1" in
 
     [ "$#" -eq 2 ] || die "Requires app name argument"
 
-    NAME="$1"
-    TAG="$2"
+    NAME="$2"
+    TAG="$3"
 
     if [[ -z "$TAG" ]]; then
       IMAGE=red/$NAME
