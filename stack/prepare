@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source $(dirname $0)/helpers.sh
+LOG=/tmp/log/$(basename $0).log
+mkdir -p /tmp/log
+
+(
+  display Installing packages
+  xargs yum -y install < /build/packages.txt
+  yum -y clean
+
+  display Installed versions:
+  (
+    git --version
+    java -version
+    ruby -v
+    gem -v
+    python -v
+    node -v
+    npm -v
+  ) | sed -u "s/^/      /"
+) 2>$1 | tee $LOG
+

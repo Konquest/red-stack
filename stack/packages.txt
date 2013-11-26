@@ -1,0 +1,9 @@
+httpd
+postgresql84-server.x86_64
+php.x86_64
+subversion
+ant
+vim-X11
+vim-common
+vim-enhancedd
+vim-minimal
