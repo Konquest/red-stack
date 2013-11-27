@@ -18,10 +18,16 @@ case "$1" in
     NAME="$2"
     IMAGE=red/$NAME
 
-    ID=$(tar -cf - . | docker run -i -a stdin konquest/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app && /build/builder")
+    ID=$(tar -cf - . | docker run -i -a stdin konquest/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app")
     test $(docker wait $ID) -eq 0
     docker commit $ID $IMAGE > /dev/null 
-    echo "Copied app to image"
+    echo "Copied app"
+
+    ID=$(docker run -i konquest/red-stack /bin/bash -c "/build/builder")
+    test $(docker wait $ID) -eq 0
+    docker commit $ID $IMAGE > /dev/null 
+    echo "Built app"
+    
 
     echo "TODO 1. build app"
     echo "TODO 2. run the app"
