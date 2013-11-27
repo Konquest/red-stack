@@ -1,5 +1,5 @@
 
-all: build install
+all: clean build install
 
 build:
 	sudo docker build -t konquest/red-stack .
@@ -7,3 +7,5 @@ build:
 install:
 	npm install -g
 
+clean:
+	sudo docker rmi konquest/red-stack
