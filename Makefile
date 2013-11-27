@@ -4,7 +4,7 @@ all: clean build install
 build:
 	sudo docker build -t konquest/red-stack .
 
-install: install_cli cleanup
+install: install_cli
 
 install_cli:
 	npm install -g
