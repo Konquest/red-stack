@@ -4,8 +4,13 @@ all: clean build install
 build:
 	sudo docker build -t konquest/red-stack .
 
-install:
+install: install_cli cleanup
+
+install_cli:
 	npm install -g
+
+cleanup:
+	sudo docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi &> /dev/null
 
 clean:
 	sudo docker images | grep 'konquest/red-stack' | awk '{print $3}' | xargs docker rmi &> /dev/null
