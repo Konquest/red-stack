@@ -1,4 +1,5 @@
 yum-priorities
+git
 ruby
 rubygems
 java-1.6.0-openjdk
