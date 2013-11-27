@@ -11,8 +11,7 @@ case "$1" in
     ;;
 
   deploy)
-    echo "Deploying image"
-    echo "5. run the app"
+    echo "Deploy app to stack"
 
     [ "$#" -eq 2 ] || die "Requires app name argument"
 
@@ -22,9 +21,10 @@ case "$1" in
     ID=$(tar -cf - . | docker run -i -a stdin kennethklee/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app && /build/builder")
     test $(docker wait $ID) -eq 0
     docker commit $ID $IMAGE > /dev/null 
+    echo "Copied app to image"
 
-
-    # TODO run the app
+    echo "TODO 1. build app"
+    echo "TODO 2. run the app"
     ;;
 
   *)
