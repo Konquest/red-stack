@@ -1,5 +1,9 @@
 
-all: build
+all: build install
 
 build:
-	docker build -t konquest/red-stack .
+	sudo docker build -t konquest/red-stack .
+
+install:
+	npm install -g
+
