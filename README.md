@@ -8,7 +8,7 @@ Note: Inspiration comes from https://github.com/progrium/buildsteps
 requirements
 ------------
 
-* GIT
+* git
 * Docker
 * NPM
 
