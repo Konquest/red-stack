@@ -5,7 +5,7 @@ case "$1" in
     if [[ -z "$2" ]]; then
       IMAGE=red/$2
     else
-      IMAGE=kennethklee/red-stack
+      IMAGE=konquest/red-stack
     fi
     docker run -i -t $IMAGE /bin/bash
     ;;
@@ -18,7 +18,7 @@ case "$1" in
     NAME="$2"
     IMAGE=red/$NAME
 
-    ID=$(tar -cf - . | docker run -i -a stdin kennethklee/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app && /build/builder")
+    ID=$(tar -cf - . | docker run -i -a stdin konquest/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app && /build/builder")
     test $(docker wait $ID) -eq 0
     docker commit $ID $IMAGE > /dev/null 
     echo "Copied app to image"
