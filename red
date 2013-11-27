@@ -12,31 +12,22 @@ case "$1" in
 
   deploy)
     echo "Deploying image"
-    echo "WIP - This should do a number of things:"
-    echo "1. tar up current directory"
-    echo "2. copy and extract the tar in a /app path"
-    echo "3. detect and run the appropriate build pack"
-    echo "4. create a new image with the changes"
     echo "5. run the app"
 
     [ "$#" -eq 2 ] || die "Requires app name argument"
 
     NAME="$2"
-    TAG="$3"
-
-    if [[ -z "$TAG" ]]; then
-      IMAGE=red/$NAME
-    else
-      IMAGE=red/$NAME:$TAG
-    fi
+    IMAGE=red/$NAME
 
     ID=$(tar -cf - . | docker run -i -a stdin kennethklee/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app && /build/builder")
     test $(docker wait $ID) -eq 0
     docker commit $ID $IMAGE > /dev/null 
 
+
+    # TODO run the app
     ;;
 
   *)
-    echo "Please use script with arguments ssh|build|deploy"
+    echo "Please use script with arguments ssh|deploy"
 
 esac
