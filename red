@@ -7,7 +7,7 @@ case "$1" in
     else
       IMAGE=konquest/red-stack
     fi
-    docker run -i -t $IMAGE /bin/bash
+    sudo docker run -i -t $IMAGE /bin/bash
     ;;
 
   deploy)
@@ -18,14 +18,14 @@ case "$1" in
     NAME="$2"
     IMAGE=red/$NAME
 
-    ID=$(tar -cf - . | docker run -i -a stdin konquest/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app")
-    test $(docker wait $ID) -eq 0
-    docker commit $ID $IMAGE > /dev/null 
+    ID=$(tar -cf - . | cat | sudo docker run -i -a stdin konquest/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app")
+    test $(sudo docker wait $ID) -eq 0
+    sudo docker commit $ID $IMAGE > /dev/null 
     echo "Copied app"
 
-    ID=$(docker run -i konquest/red-stack /bin/bash -c "/build/builder")
-    test $(docker wait $ID) -eq 0
-    docker commit $ID $IMAGE > /dev/null 
+    ID=$(sudo docker run -d $IMAGE /build/builder)
+    test $(sudo docker wait $ID) -eq 0
+    sudo docker commit $ID $IMAGE > /dev/null 
     echo "Built app"
     
 
