@@ -1,7 +1,5 @@
 
-all: install
-
-install: build install_cli remove_none
+install: clean build install_cli remove_none
 
 clean:
 	echo "-----> Deleting old instances of the stack"

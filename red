@@ -30,7 +30,8 @@ case "$1" in
     NAME="$2"
     IMAGE=red/$NAME
 
-    ID=$(sudo docker run -d $IMAGE /build/builder)
+    exec 5>&1
+    ID=$(sudo docker run -d $IMAGE /build/builder | tee > (cat - >&5))
     test $(sudo docker wait $ID) -eq 0
     sudo docker commit $ID $IMAGE > /dev/null
     echo "Built app"
