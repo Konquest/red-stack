@@ -6,3 +6,10 @@ java-1.6.0-openjdk
 subversion
 httpd
 php.x86_64
+gcc
+gcc-c++
+autoconf
+automake
+make
+curl
+openssl-devel

@@ -32,11 +32,14 @@ case "$1" in
     IMAGE=red/$NAME
 
     exec 5>&1
-    ID=$(sudo docker run -i $IMAGE /build/builder)
-    sudo docker logs $ID
+    ID=$(sudo docker run -d $IMAGE /build/builder)
+    sudo docker attach $ID
     test $(sudo docker wait $ID) -eq 0
     sudo docker commit $ID $IMAGE > /dev/null
-    echo "Built app"
+    ;;
+
+  cleanup)
+    sudo docker images | grep '<none>' | awk '{print $$3}' | sudo xargs docker rmi || true
     ;;
 
   run)
