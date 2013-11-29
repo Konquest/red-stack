@@ -7,6 +7,8 @@ mkdir -p /tmp/log
 (
   display Installing packages
   xargs yum -y install < /build/packages.txt
+  ln -s /usr/lib64/libssl.so.10 /usr/lib64/libssl.so.0.9.8
+  ln -s /usr/lib64/libcrypto.so.10 /usr/lib64/libcrypto.so.0.9.8
 
   display Install buildpacks
   (

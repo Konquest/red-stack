@@ -1,5 +1,5 @@
 
-install: build install_cli
+install: build cli
 
 clean:
 	echo "-----> Deleting old instances of the stack"
@@ -9,7 +9,7 @@ clean:
 build:
 	sudo docker build -t konquest/red-stack .
 
-install_cli:
+cli:
 	npm install -g
 
 remove_none:
