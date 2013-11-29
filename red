@@ -10,11 +10,10 @@ case "$1" in
     sudo docker run -i -t $IMAGE /bin/bash
     ;;
 
-  deploy)
-    echo "Deploy app to stack"
+  init)
+    echo "Initialize app to stack (copy over to /app)"
 
     [ "$#" -eq 2 ] || die "Requires app name argument"
-
     NAME="$2"
     IMAGE=red/$NAME
 
@@ -22,18 +21,26 @@ case "$1" in
     test $(sudo docker wait $ID) -eq 0
     sudo docker commit $ID $IMAGE > /dev/null 
     echo "Copied app"
+    ;;
+
+  build)
+    echo "Building app..."
+
+    [ "$#" -eq 2 ] || die "Requires app name argument"
+    NAME="$2"
+    IMAGE=red/$NAME
 
     ID=$(sudo docker run -d $IMAGE /build/builder)
     test $(sudo docker wait $ID) -eq 0
-    sudo docker commit $ID $IMAGE > /dev/null 
+    sudo docker commit $ID $IMAGE > /dev/null
     echo "Built app"
-    
+    ;;
 
-    echo "TODO 1. build app"
+  run)
     echo "TODO 2. run the app"
     ;;
 
   *)
-    echo "Please use script with arguments ssh|deploy"
+    echo "Please use script with arguments ssh|init|build"
 
 esac

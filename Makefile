@@ -1,10 +1,7 @@
 
 all: install
 
-install: build install_cli cleanup
-
-cleanup:
-	sudo docker images | grep '<none>' | awk '{print $$3}' | sudo xargs docker rmi || true
+install: build install_cli remove_none
 
 clean:
 	echo "-----> Deleting old instances of the stack"
@@ -16,4 +13,7 @@ build:
 
 install_cli:
 	npm install -g
+
+remove_none:
+	sudo docker images | grep '<none>' | awk '{print $$3}' | sudo xargs docker rmi || true
 
