@@ -3,10 +3,11 @@
 case "$1" in
   ssh)
     if [[ -z "$2" ]]; then
-      IMAGE=red/$2
-    else
       IMAGE=konquest/red-stack
+    else
+      IMAGE=red/$2
     fi
+    echo "SSHing to $IMAGE"
     sudo docker run -i -t $IMAGE /bin/bash
     ;;
 
