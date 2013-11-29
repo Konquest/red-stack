@@ -15,8 +15,7 @@ case "$1" in
     echo "Initialize app to stack (copy over to /app)"
 
     [ "$#" -eq 2 ] || die "Requires app name argument"
-    NAME="$2"
-    IMAGE=red/$NAME
+    IMAGE=red/$2
 
     ID=$(tar -cf - . | cat | sudo docker run -i -a stdin konquest/red-stack /bin/bash -c "mkdir -p /app && tar -xC /app")
     test $(sudo docker wait $ID) -eq 0
@@ -28,8 +27,7 @@ case "$1" in
     echo "Building app..."
 
     [ "$#" -eq 2 ] || die "Requires app name argument"
-    NAME="$2"
-    IMAGE=red/$NAME
+    IMAGE=red/$2
 
     exec 5>&1
     ID=$(sudo docker run -d $IMAGE /build/builder)
@@ -43,7 +41,11 @@ case "$1" in
     ;;
 
   run)
-    echo "TODO 2. run the app"
+    IMAGE=red/$2
+
+    ID=$(sudo docker run -d -p 8080 -e PORT=8080 $IMAGE /bin/bash -c "/start web")
+    PORT=$(sudo docker port $ID 8080 | sed 's/0.0.0.0://')
+    echo "running at http://localhost:$PORT"
     ;;
 
   *)
