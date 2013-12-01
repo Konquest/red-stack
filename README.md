@@ -35,7 +35,7 @@ usage
 ```
 red init <app name>
 ```
-Creates a new image from the red-stack base. Copies the current directory into the /app directory. The new image will have the name red/<app name>
+Creates a new image from the red-stack base. Copies the current directory into the /app directory. The new image will have the name `red/<app name>`
 
 ```
 red build <app name>
