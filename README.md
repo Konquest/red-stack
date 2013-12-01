@@ -33,13 +33,16 @@ usage
 -----
 
 ```
-red deploy <app name>
+red init <app name>
 ```
-Deploys the current directory to a docker image with the name red/<app name>
+Creates a new image from the red-stack base. Copies the current directory into the /app directory. The new image will have the name red/<app name>
 
+```
+red build <app name>
+```
+Initializes the builder from https://github.com/progrium/buildstep which invokes the heroku buildpacks and builds the application. It also creates a command within the image, `/start`, to start the application.
 
 ```
 red ssh <app name>
 ```
 Simply ssh into the application docker image.
-
