@@ -48,7 +48,17 @@ case "$1" in
     echo "running at http://localhost:$PORT"
     ;;
 
+  help)
+    echo "usage: red <command>"
+    echo
+    echo "commands:"
+    echo "init <app>   Initializes an image from base. Copies current directory to /app."
+    echo "build <app>  Builds the application in /app and creates a command /start."
+    echo "ssh <app>    SSH into the image."
+    echo "help         Display this help dialog."
+    ;;
+
   *)
-    echo "Please use script with arguments ssh|init|build"
+    echo "Please use script with arguments ssh|init|build|help"
 
 esac
